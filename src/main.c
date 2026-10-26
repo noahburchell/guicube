@@ -11,7 +11,7 @@ static void registry_handle_global(void* data, struct wl_registry* registry,
 	       interface, version, name);
 }
 
-static void registry_handle_global_remove(void *data, struct wl_registry *registry,
+static void registry_handle_global_remove(void* data, struct wl_registry* registry,
 					  uint32_t name) {
 	//blank?
 }
@@ -29,6 +29,10 @@ int main(void) {
 		fprintf(stderr, "main.c:8 connection failed\n");
 		return 1;
 	}
+
+	struct wl_registry* registry = wl_display_get_registry(display);
+	wl_registry_add_listener(registry, &registry_listener, NULL);
+	wl_display_roundtrip(display);
 
 	return 0;
 }
